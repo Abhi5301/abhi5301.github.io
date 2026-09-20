@@ -19,7 +19,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset
 .card:hover{border-color:var(--acc);text-decoration:none}.card[hidden]{display:none}
 .card h3{margin-top:14px}.card p{color:var(--mut);font-size:.95rem;margin:0 0 10px}.tags{color:var(--acc);font-size:.85rem}
 .ph{background:var(--panel);border:1px dashed var(--line);border-radius:4px;aspect-ratio:16/10;display:grid;place-items:center;color:var(--mut);font-size:.9rem}
-.hero-media{aspect-ratio:16/9;margin:32px 0}
+.hero-media{margin:32px 0}.ph.hero-media{aspect-ratio:16/9}
+.media{width:100%;height:auto;border-radius:4px;display:block}.card .media{aspect-ratio:16/10;object-fit:cover}.gal .media{aspect-ratio:16/10;object-fit:contain;background:var(--panel)}
 .page{padding-top:24px;padding-bottom:72px;max-width:780px}.back{font-size:.95rem}.meta{color:var(--acc);margin-top:-.2em}
 .page section{margin-top:40px}.page ul{padding-left:1.2em}.page li{margin-bottom:.6em}
 .todo{color:var(--mut);font-style:italic}
