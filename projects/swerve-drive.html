@@ -1,3 +1,89 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Differential Swerve Drive Module | Abhi</title><meta name="description" content="Redesigned a drivetrain into a differential swerve system with full holonomic motion and double the traction."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../assets/css/style.css"></head><body>
-<header class="nav"><a class="brand" href="../index.html">Abhi</a><nav><a href="../index.html#projects">Projects</a><a href="../about.html">About</a><a href="../resume.pdf">Resume</a></nav></header>
-<main class="wrap page"><p class="back"><a href="../index.html#projects">Back to projects</a></p><h1>Differential Swerve Drive Module</h1><p class="meta">Jun 2025 to Aug 2025</p><p class="lead">Redesigned a drivetrain into a differential swerve system with full holonomic motion and double the traction.</p><p style="border-left:2px solid var(--acc);padding-left:14px">Team project on the VEX U team. I led the design of the printed bearing surfaces and cages, the wheel bevel gear packaging, and the cast wheel, and contributed throughout the rest of the design process.</p><img class="media hero-media" src="../assets/images/differential_swerve/differential_swerve_overview.png" alt="CAD render of the differential swerve module showing the gear stack, drive motor, and wheel" loading="lazy"><section><h2>Problem</h2><p>The 2025 to 2026 VEX U season rewards robots that can move in any direction and change heading quickly. The drivetrain had to be holonomic, comply with the game manual, run smoothly with little maintenance, and be powered by at least eight drive motors combined.</p><p>Fitting motors, a planetary gearbox, and a differential into one small module was the core packaging challenge. Standard bearings were too large and hard to find in the sizes needed, so the bearings had to be designed into the printed parts.</p></section><section><h2>What I built</h2><ul><li><strong>Printed ball bearings.</strong> 2 mm steel balls ride on 1 mm steel wire inlaid into the printed rings, giving a hard, wear resistant race that plastic alone can't provide.</li><li><strong>Printable geometry.</strong> The rings are shaped to print with minimal or no supports, so the small parts come out with a clean bearing surface.</li><li><strong>Integrated into the gearbox.</strong> Building the bearings into the planetary stage allowed compact stacks of planetary gears.</li><li><strong>Bearing cages.</strong> Cages hold the balls evenly spaced around the ring. Clearances are tight, so the ring and cage geometry had to print cleanly while staying clear of the bearing to avoid extra friction.</li><li><strong>Cast wheel.</strong> A custom printed hub with a cast core, molded in 30A urethane using a three part mold for extra traction.</li><li><strong>Differential at the wheel.</strong> A 0.25 in standoff serves as a dead axle, with pinion bevel gears forming the differential. The bevel gear bolts to the wheel hub with undercut M3 screws, placed where the axle bearing would normally sit. The bearing press fits onto the bevel gear directly above the screws. This whole stack sits inside the wheel hub, and packaging it was one of the hardest parts of the design.</li></ul></section><section><h2>Design process</h2><ul><li>Team architecture: a differential swerve layout lets eight drive motors work together while keeping full steering control.</li><li>Modeled in Onshape using master model practices.</li><li>Used torque and speed calculations to choose gear ratios for the expected load.</li><li>Applied 3D printing design for manufacturing rules to keep tolerance stack low.</li><li>Designed for assembly, modularity, and repair, using printed and off the shelf parts that are easy to service.</li><li>Ran fatigue and wear analysis during testing to refine part designs.</li></ul></section><section><h2>Results</h2><ul><li>A functional swerve module that meets the design objectives.</li><li>Doubled system traction compared to the previous drivetrain.</li><li>Autonomous routines with 53% more possible points.</li><li>Next steps: subsystem optimization and testing on the robot.</li></ul></section><section><h2>Tools</h2><p>Onshape, FDM 3D printing with variable layer heights, urethane casting with a three part mold</p></section><section><h2>Gallery</h2><div class="gal"><img class="media " src="../assets/images/differential_swerve/differential_swerve_crosssection.png" alt="Cross-section of the differential swerve module showing the bevel gear differential and wheel axle" loading="lazy"><img class="media " src="../assets/images/differential_swerve/differential_swerve_wheel_packaging.png" alt="CAD view of the wheel hub, bevel gear, and dead axle packaging" loading="lazy"><img class="media " src="../assets/images/differential_swerve/differential_swerve_turret_bearing.png" alt="CAD view of the turret and printed bearing area" loading="lazy"></div></section></main><footer><div class="wrap"><a href="https://github.com/YOUR-USERNAME">GitHub</a><a href="https://linkedin.com/in/YOUR-PROFILE">LinkedIn</a><a href="mailto:you@example.com">Email</a></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Differential Swerve Drive Module | Abhi</title>
+    <meta
+      name="description"
+      content="Redesigned a drivetrain into a differential swerve system with full holonomic motion and double the traction."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="../assets/css/style.css">
+  </head>
+  <body>
+    <div data-site-header></div>
+    <main class="wrap page">
+      <p class="back"><a href="../index.html#projects">Back to projects</a></p>
+      <h1>Differential Swerve Drive Module</h1>
+      <p class="meta">Jun 2025 to Aug 2025</p>
+      <p class="lead">
+        Redesigned a drivetrain into a differential swerve system with full holonomic
+        motion and double the traction.
+      </p>
+      <p style="border-left:2px solid var(--acc);padding-left:14px">
+        Team project on the VEX U team. I led the design of the printed bearing
+        surfaces and cages, the wheel bevel gear packaging, and the cast wheel, and
+        contributed throughout the rest of the design process.
+      </p>
+      <img
+        class="media hero-media"
+        src="../assets/images/differential_swerve/differential_swerve_overview.png"
+        alt="CAD render of the differential swerve module showing the gear stack, drive motor, and wheel"
+        loading="lazy"
+      >
+      <section>
+        <h2>Problem</h2>
+        <p>
+          The 2025 to 2026 VEX U season rewards robots that can move in any direction
+          and change heading quickly. The drivetrain had to be holonomic, comply with
+          the game manual, run smoothly with little maintenance, and be powered by at
+          least eight drive motors combined.
+        </p>
+        <p>
+          Fitting motors, a planetary gearbox, and a differential into one small
+          module was the core packaging challenge. Standard bearings were too large and
+          hard to find in the sizes needed, so the bearings had to be designed into
+          the printed parts.
+        </p>
+      </section>
+      <section>
+        <h2>What I built</h2>
+        <ul>
+          <li><strong>Printed ball bearings.</strong> 2 mm steel balls ride on 1 mm steel wire inlaid into the printed rings, giving a hard, wear resistant race that plastic alone can't provide.</li>
+          <li><strong>Printable geometry.</strong> The rings are shaped to print with minimal or no supports, so the small parts come out with a clean bearing surface.</li>
+          <li><strong>Integrated into the gearbox.</strong> Building the bearings into the planetary stage allowed compact stacks of planetary gears.</li>
+          <li><strong>Bearing cages.</strong> Cages hold the balls evenly spaced around the ring. Clearances are tight, so the ring and cage must be printed accurately.</li>
+          <li><strong>Wheel fabrication.</strong> The wheel required a high-strength polyurethane tread, epoxy, and a cast core. The design packages a curved wheel contact patch to increase traction while maintaining a small footprint and low center of gravity.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Results</h2>
+        <p>
+          The module delivered full holonomic motion while significantly improving
+          traction via the differential gearing. The design remained compact enough to
+          fit in the robot and was simplified for manufacturing under team constraints.
+        </p>
+      </section>
+      <section>
+        <h2>Tools</h2>
+        <p>VEX U drivetrain design, parametric CAD, printed bearings, cast wheel design, gear packaging</p>
+      </section>
+      <section>
+        <h2>Gallery</h2>
+        <div class="gal">
+          <div class="ph "><span>Photo or CAD render</span></div>
+          <div class="ph "><span>Photo or CAD render</span></div>
+          <div class="ph "><span>Photo or CAD render</span></div>
+        </div>
+      </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="../assets/js/site-shared.js"></script>
+  </body>
+</html>
