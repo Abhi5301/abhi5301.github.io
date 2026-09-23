@@ -9,7 +9,7 @@
       <nav>
         <a href="${root}index.html#projects">Projects</a>
         <a href="${root}about.html">About</a>
-        <a href="${root}resume.pdf">Resume</a>
+        <a href="${root}assets/resume/Abhi Patel Resume.pdf">Resume</a>
       </nav>
     </header>
   `;
