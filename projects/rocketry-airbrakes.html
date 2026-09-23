@@ -6,7 +6,7 @@
     <title>Rocketry Airbrakes | Abhi</title>
     <meta
       name="description"
-      content="Redesigned high power rocket airbrakes with a 30% smaller footprint, working with avionics and propulsion subteams."
+      content="Redesigned a high power rocket airbrake mechanism with a 30% smaller footprint, equation-driven cam actuation, and synchronized deployment using MGN9 rails."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,9 @@
       <h1>Rocketry Airbrakes</h1>
       <p class="meta">Aug 2024 to May 2025</p>
       <p class="lead">
-        Redesigned high power rocket airbrakes with a 30% smaller footprint, working
-        with avionics and propulsion subteams.
+        Redesigned a high power rocket airbrake mechanism with a 30% smaller footprint,
+        equation-driven cam actuation, and synchronized deployment for equivalent drag
+        in a much narrower rocket body.
       </p>
       <video
         class="media hero-media"
@@ -35,31 +36,104 @@
         playsinline
       ></video>
       <section>
-        <h2>Requirements</h2>
-        <p class="todo">Add requirements here.</p>
+        <h2>Problem</h2>
+        <p>
+          This project was a redesign of a previous airbrake design. The original system
+          was effective, but it was too large to fit inside a newer, much narrower rocket
+          diameter while maintaining an equivalent amount of braking force. The redesign
+          needed to preserve performance, reduce the footprint by about 30%, and still
+          actuate the fins symmetrically outside the rocket body during deployment.
+        </p>
+        <p>
+          The mechanism also needed to keep servo load predictable and low enough for a
+          reliable control system during flight. That meant the deployment geometry had to
+          do more than simply move the fins: it had to turn motor rotation into linear
+          motion while normalizing the torque load across the full actuation range.
+        </p>
       </section>
       <section>
         <h2>What I built</h2>
         <ul>
-          <li>Redesigned the airbrake mechanism with a 30% smaller footprint.</li>
-          <li>Collaborated with avionics and propulsion subteams to meet system requirements.</li>
+          <li><strong>Central actuator plate.</strong> The heart of the mechanism was a single actuator plate with curved cam slots. A bearing rode inside each slot so the plate's rotation translated into controlled linear motion.</li>
+          <li><strong>Four-fin synchronized actuation.</strong> The plate drove four airbrake fins in sync using MGN9-constrained linear motion, moving the fins smoothly and symmetrically outside the rocket body.</li>
+          <li><strong>Reduced footprint redesign.</strong> The mechanism was redesigned from the previous version to reduce its footprint by 30% while preserving equivalent braking area and drag performance in a narrower rocket tube.</li>
+          <li><strong>Equation-driven geometry.</strong> The actuator-plate cam curve was specifically designed as an equation-driven logarithmic spiral, allowing the kinematics to be tuned for both travel and force behavior instead of relying on a generic circular or arbitrary profile.</li>
         </ul>
       </section>
       <section>
         <h2>Calculations</h2>
-        <p class="todo">Add calculations here.</p>
+        <p>
+          One of the most interesting engineered parts of the mechanism was the actuator
+          plate. The curve that guided the cam motion was not arbitrary; it was derived
+          from a fitted logarithmic spiral equation. The goal was to <em>normalize the
+          motor torque</em> so the load on the servo stayed nearly constant as the fin
+          actuated farther out from the body.
+        </p>
+        <p>
+          In the kinematic model, the actuator plate rotates by angle <strong>θ</strong>,
+          while the bearing follows a curved cam path defined by the logarithmic spiral
+          equation:
+        </p>
+        <p style="font-size:1.2rem; margin: 0.5rem 0; text-align: center;">
+          r = a e<sup>bθ</sup>
+        </p>
+        <p>
+          This relationship was chosen because the torque requirement needed to scale more
+          predictably with actuation angle than a simple linear link would allow. The
+          geometry was tuned so the effective reaction force and moment arm varied in a
+          way that kept the servo torque nearly constant over the deployment range. In
+          other words, regardless of how far the airbrakes were extended, the motor would
+          see a similar load instead of a large torque spike near the end of travel.
+        </p>
+        <p>
+          This is especially important for flight controls and deployment timing. A servo
+          that sees a constant or near-constant load is easier to drive consistently,
+          operates with more margin, and remains more robust during the dynamic conditions
+          of rocket deployment. The actuator plate geometry was therefore a key design
+          lever for both mechanism efficiency and control reliability.
+        </p>
       </section>
       <section>
         <h2>Machining and manufacturing</h2>
-        <p class="todo">Add machining and manufacturing here.</p>
+        <p>
+          The actuator plate and the fin-support features were manufactured with a strong
+          emphasis on precision. The cam slots had to match the intended equation-driven
+          curve closely enough that the bearings traveled smoothly and without binding,
+          while still staying stiff enough to handle the fin loads and the aerodynamic
+          forces generated during deployment. The overall system was designed to be both
+          compact and manufacturable in a student team environment without sacrificing
+          repeatability.
+        </p>
+        <p>
+          The mechanism was machined from aluminum plate and carefully aligned so the
+          bearing tracks and linear rails remained square to one another. The MGN9 rails
+          constrained the fins in a predictable linear path, helping the four fins move in
+          synchronization rather than relying on loose linkage tolerances. This was a
+          crucial part of making the design reliable in a real rocket, where not only the
+          drag profile but also the structural integrity of the deployment system matters.
+        </p>
+        <p>
+          The manufacturing work also reflected a practical engineering tradeoff: the
+          redesign had to be compact enough for a narrow chassis while still producing a
+          braking area equivalent to the previous design. That meant every feature had to
+          earn its volume, from the cam path and plate thickness to the support structure
+          and rail layout.
+        </p>
       </section>
       <section>
-        <h2>Testing and results</h2>
-        <p class="todo">Add testing and results here.</p>
+        <h2>Results</h2>
+        <p>
+          The redesigned airbrakes kept the same braking capability in a substantially
+          smaller package, while improving the deployment behavior through smoother motion
+          and more consistent servo loading. By combining a reduced-footprint geometry,
+          a synchronized rail system, and a torque-normalized cam profile, the mechanism
+          balanced compactness, manufacturability, and control reliability in a way that
+          made it suitable for a modern high-power rocket configuration.
+        </p>
       </section>
       <section>
         <h2>Tools</h2>
-        <p>CAD, machining</p>
+        <p>CAD, mechanism design, kinematic analysis, machining, MGN9 rail system design</p>
       </section>
       <section>
         <h2>Gallery</h2>
@@ -71,8 +145,27 @@
               alt="Overview of the rocketry airbrakes assembly"
             >
           </a>
-          <div class="ph "><span>Photo or CAD render</span></div>
-          <div class="ph "><span>Photo or CAD render</span></div>
+          <a href="../assets/images/rocketry_airbrakes/airbrakes-fin-plate.JPG" target="_blank" rel="noopener">
+            <img
+              class="media"
+              src="../assets/images/rocketry_airbrakes/airbrakes-fin-plate.JPG"
+              alt="Machined airbrake fin plate assembly"
+            >
+          </a>
+          <a href="../assets/images/rocketry_airbrakes/airbrakes-fin-plate-machining.JPG" target="_blank" rel="noopener">
+            <img
+              class="media"
+              src="../assets/images/rocketry_airbrakes/airbrakes-fin-plate-machining.JPG"
+              alt="Machining process for the airbrake fin plate"
+            >
+          </a>
+          <a href="../assets/images/rocketry_airbrakes/airbrakes-actuator-plate-machining.JPG" target="_blank" rel="noopener">
+            <img
+              class="media"
+              src="../assets/images/rocketry_airbrakes/airbrakes-actuator-plate-machining.JPG"
+              alt="Machining process for the airbrake actuator plate"
+            >
+          </a>
         </div>
       </section>
     </main>

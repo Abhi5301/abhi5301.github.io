@@ -25,7 +25,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset
 .page section{margin-top:40px}.page ul{padding-left:1.2em}.page li{margin-bottom:.6em}
 .todo{color:var(--mut);font-style:italic}
 .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.gal a{display:block;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--panel);transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease}
+.gal a:hover{border-color:var(--acc);text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.18);transform:translateY(-1px)}
+.gal .media{aspect-ratio:16/10;object-fit:contain;background:var(--panel);transition:transform .2s ease,opacity .2s ease;cursor:pointer}
+.gal a:hover .media{transform:scale(1.02);opacity:.98}
+.gallery-modal{position:fixed;inset:0;background:rgba(8,12,18,.9);display:flex;align-items:center;justify-content:center;padding:24px;z-index:1000}
+.gallery-modal[hidden]{display:none}
+.gallery-modal__backdrop{position:absolute;inset:0}
+.gallery-modal__panel{position:relative;max-width:min(92vw,1100px);max-height:92vh;width:100%;display:flex;align-items:center;justify-content:center;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.gallery-modal__image{display:block;max-width:100%;max-height:calc(92vh - 72px);width:auto;height:auto;border-radius:4px;object-fit:contain;background:var(--panel)}
+.gallery-modal__close{position:absolute;top:12px;right:12px;appearance:none;border:1px solid var(--line);background:rgba(12,17,23,.9);color:var(--text);border-radius:50%;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;font-size:1.2rem;line-height:1}
+.gallery-modal__close:hover{text-decoration:none}
 .btn{display:inline-block;border:1px solid var(--acc);border-radius:6px;padding:8px 18px}
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut)}footer a{margin-right:24px}
-@media(max-width:600px){.hero{padding:56px 0 40px}.filters button{margin:0 8px 0 0}}
+@media(max-width:600px){.hero{padding:56px 0 40px}.filters button{margin:0 8px 0 0}.gallery-modal__panel{padding:12px}.gallery-modal__close{top:8px;right:8px}} 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
