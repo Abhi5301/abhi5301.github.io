@@ -6,7 +6,7 @@
     <title>Industrial Robotic Automation System | Abhi</title>
     <meta
       name="description"
-      content="A coordinated multi-robot sorting cell with two UR5e arms and a Fanuc Delta manipulator."
+      content="A vision-guided automation cell coordinating two UR5e arms, a Fanuc M-1iA, conveyors, and an Arduino PLC to palletize aluminum cubes."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,37 +23,73 @@
       <h1>Industrial Robotic Automation System</h1>
       <p class="meta">Mar 2026 to May 2026</p>
       <p class="lead">
-        A coordinated multi-robot sorting cell with two UR5e arms and a Fanuc Delta
-        manipulator.
+        A three-robot cell that used vision-guided picking, conveyor transfers, and
+        coordinated palletizing to move randomly oriented aluminum cubes through a
+        complete automated workflow.
       </p>
-      <div class="ph hero-media"><span>Hero image or video</span></div>
+      <div class="ph hero-media"><span>Full-cell operation clip</span></div>
       <section>
-        <h2>Problem</h2>
-        <p class="todo">Add problem here.</p>
+        <h2>System overview</h2>
+        <p>
+          The cell handled aluminum cubes scattered in an input area and moved them
+          through three robotic stations. A vision-guided UR5e picked cubes and placed
+          them on a conveyor. Conveyor guides aligned the cubes for a second UR5e,
+          which used a dual gripper to collect two cubes at a time and load them into
+          the Fanuc M-1iA feeder. The M-1iA then palletized the cubes into a grid.
+        </p>
       </section>
       <section>
-        <h2>What I built</h2>
+        <h2>My contributions</h2>
         <ul>
-          <li>Integrated two UR5e arms and a Fanuc Delta manipulator into a coordinated multi-robot sorting cell.</li>
-          <li>Programmed an Arduino-based PLC in structured text to orchestrate control across all three robots.</li>
-          <li>Used vision cameras to detect and localize randomized parts for automated pick and place.</li>
-          <li>Synchronized conveyors and sensors to palletize sorted parts into a structured grid.</li>
+          <li>
+            Developed parametric palletizing logic so the operator could change the
+            pallet layout instead of relying on one fixed set of taught positions.
+          </li>
+          <li>
+            Defined robot/PLC I/O and communication bits for readiness, part handoffs,
+            cycle completion, pallet status, and coordinated stops and resumes.
+          </li>
+          <li>
+            Worked with teammates to program the UR5e and M-1iA teaching-pendant
+            routines and integrate them with the Arduino Opta PLC.
+          </li>
         </ul>
       </section>
       <section>
-        <h2>Results</h2>
-        <p class="todo">Add results here.</p>
+        <h2>Cell coordination</h2>
+        <p>
+          The PLC coordinated the stations and handled flow control across the cell.
+          An operator panel could pause upstream cube collection and the conveyor for
+          replenishment. Conveyor sensors also stopped upstream operation when cubes
+          backed up, preventing the first station from overloading the line.
+        </p>
+        <p>
+          At the second station, the UR5e paused and resumed the conveyor as it
+          collected and repositioned cubes with its dual gripper. The M-1iA waited for
+          a queued part before palletizing; the PLC tracked cubes waiting in the feeder
+          and enabled the operator to clear a full pallet before production resumed.
+          The robot could then work through parts that had accumulated in the queue.
+        </p>
       </section>
       <section>
-        <h2>Tools</h2>
-        <p>UR5e, Fanuc Delta, Arduino PLC, structured text, machine vision</p>
+        <h2>Outcome</h2>
+        <p>
+          The project brought three manipulators, conveyors, sensors, vision, and
+          operator controls into one coordinated material-handling process. My work
+          focused on making the pallet pattern configurable and defining the signals
+          that let the robots and PLC coordinate their cycles.
+        </p>
       </section>
       <section>
-        <h2>Gallery</h2>
+        <h2>Technology</h2>
+        <p>UR5e, Fanuc M-1iA, Arduino Opta PLC, structured text, machine vision, conveyors, dual gripper</p>
+      </section>
+      <section>
+        <h2>From the cell</h2>
         <div class="gal">
-          <div class="ph "><span>Photo or CAD render</span></div>
-          <div class="ph "><span>Photo or CAD render</span></div>
-          <div class="ph "><span>Photo or CAD render</span></div>
+          <div class="ph"><span>Vision-guided pickup and conveyor handoff</span></div>
+          <div class="ph"><span>Dual-gripper transfer to the M-1iA feeder</span></div>
+          <div class="ph"><span>M-1iA palletizing and completed grid</span></div>
         </div>
       </section>
     </main>
