@@ -6,7 +6,7 @@
     <title>SLAM Pathing and Navigation System | Abhi</title>
     <meta
       name="description"
-      content="A ROS2 system that maps and localizes a robot from lidar data and plans efficient paths."
+      content="A ROS 2 Jazzy robotics system for autonomous maze exploration, frontier-based mapping, risk-aware path planning, and AMCL navigation on TurtleBot3."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,38 +23,160 @@
       <h1>SLAM Pathing and Navigation System</h1>
       <p class="meta">Mar 2026 to May 2026</p>
       <p class="lead">
-        A ROS2 system that maps and localizes a robot from lidar data and plans
-        efficient paths.
+        Autonomous maze exploration and map-based navigation on a TurtleBot3 Burger,
+        with a shared ROS 2 software stack tested in Gazebo and on the physical robot.
       </p>
-      <div class="ph hero-media"><span>Hero image or video</span></div>
+      <div class="video-embed hero-media">
+        <iframe
+          src="https://www.youtube.com/embed/uwsRO26ctsw?autoplay=1&mute=1&loop=1&playlist=uwsRO26ctsw&rel=0&playsinline=1&controls=1"
+          title="TurtleBot3 autonomous maze exploration and navigation"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p><a href="https://youtu.be/uwsRO26ctsw">Watch on YouTube</a></p>
       <section>
-        <h2>Problem</h2>
-        <p class="todo">Add problem here.</p>
+        <h2>System overview</h2>
+        <p>
+          This project brings together two autonomous behaviors on a TurtleBot3
+          Burger: explore an unknown maze, build a map, and return to the start; then
+          use the saved map to localize and navigate to a user-selected goal. The ROS 2
+          software runs in both Gazebo and on the physical robot, allowing the same
+          nodes and interfaces to be tested in simulation and in the lab.
+        </p>
       </section>
       <section>
-        <h2>What I built</h2>
+        <h2>My contribution</h2>
         <ul>
-          <li>Developed a ROS2 SLAM system in Python to localize and map a robot in real time from lidar data.</li>
-          <li>Designed a path optimization algorithm that minimizes traversal time between arbitrary points on the map.</li>
-          <li>Built exception handling and edge case tests for reliable performance under sensor uncertainty.</li>
-          <li>Ran field trials across varied operating conditions to validate performance.</li>
+          <li>
+            Designed and implemented the Controller's ROS 2 <code>follow_path</code>
+            action server, including live progress feedback, goal handling, and cancellation.
+          </li>
+          <li>
+            Implemented most of the <code>Frontier</code> class, which groups
+            8-connected map cells and provides cell-addition, size, and centroid operations.
+          </li>
+          <li>
+            Integrated and tested the action server with Planner and Explorer, and
+            helped tune pure pursuit and exploration behavior on the physical robot.
+          </li>
         </ul>
       </section>
       <section>
-        <h2>Results</h2>
-        <p class="todo">Add results here.</p>
+        <h2>Explorer and frontier selection</h2>
+        <p>
+          The Explorer package consumes the live occupancy map from SLAM Toolbox and
+          looks for frontier cells: known free cells along the boundary with unknown
+          space. It groups adjacent cells into frontier regions. Each
+          <code>Frontier</code> stores its cells as a set, supports adding a neighboring
+          cell, and computes a centroid that Explorer can use as a planning target.
+        </p>
+        <figure class="project-figure">
+          <img
+            class="media"
+            src="../assets/images/slam_navigation/explorer_node.png"
+            alt="Explorer node flowchart showing frontier detection, scoring, path planning, and path following"
+            loading="lazy"
+          >
+          <figcaption>Explorer repeatedly identifies frontier regions, selects a target, and requests a path.</figcaption>
+        </figure>
+        <p>
+          Explorer ranks candidate frontiers with a weighted score: distance from the
+          robot contributes 45%, heading alignment 35%, and frontier size 20%. The
+          position term in the implementation is disabled. These were the weights on
+          the final robot. Explorer requests a route to the selected frontier, then
+          uses Controller feedback to decide when it has made enough progress to stop
+          and reevaluate against the latest map. When little unknown space or no
+          frontiers remain, Explorer saves the map and plans back to the recorded
+          starting position.
+        </p>
+      </section>
+      <section>
+        <h2>Planner and Controller</h2>
+        <p>
+          The Planner package converts the occupancy grid into a safer configuration
+          space by expanding obstacles and adding a graded risk cost around them. Its
+          A* search combines travel distance with the cost of entering each cell, so a
+          geometrically short route can lose to one with more clearance. A path
+          simplification pass removes redundant collinear grid points before the route
+          is returned to a client.
+        </p>
+        <p>
+          Controller exposes path following as a ROS 2 action. Its pure-pursuit loop
+          finds a lookahead point on the route and computes the curvature needed to
+          reach it; linear speed is reduced on tighter turns. While driving, the
+          action reports percent complete, distance remaining, and remaining
+          waypoints. Explorer can cancel the active action and choose a new frontier
+          as the map changes, while Controller stops the robot when cancellation is
+          accepted.
+        </p>
+      </section>
+      <section>
+        <h2>Navigator and AMCL</h2>
+        <p>
+          Navigator is a separate mode for using a previously saved map. Instead of
+          SLAM, it runs AMCL, which estimates the robot's pose by comparing lidar
+          observations with the known map. The robot rotates in place to gather
+          observations; Navigator monitors the estimated pose covariance and waits
+          until uncertainty drops below a threshold before accepting a goal pose from
+          RViz. It then requests a route from Planner and sends it to Controller.
+        </p>
+        <figure class="project-figure">
+          <img
+            class="media"
+            src="../assets/images/slam_navigation/navigator_node.png"
+            alt="Navigator node flowchart showing AMCL localization, goal reception, planning, and path execution"
+            loading="lazy"
+          >
+          <figcaption>Navigator waits for AMCL confidence before planning to an RViz goal.</figcaption>
+        </figure>
+        <p>
+          Early tests showed AMCL could settle on a visually similar but incorrect
+          location. Tuning its motion-model parameters and global initialization made
+          convergence faster and more reliable. Localization was solid enough for
+          real-world navigation, although it could still be improved.
+        </p>
+        <div class="gal">
+          <figure class="project-figure">
+            <img
+              class="media"
+              src="../assets/images/slam_navigation/false_localization.png"
+              alt="AMCL falsely localizing the robot to a similar-looking location on the map"
+              loading="lazy"
+            >
+            <figcaption>Initial AMCL tuning could converge on a similar-looking wrong location.</figcaption>
+          </figure>
+          <figure class="project-figure">
+            <img
+              class="media"
+              src="../assets/images/slam_navigation/accurate_localization.png"
+              alt="AMCL pose estimate aligned with the robot's actual location on the map"
+              loading="lazy"
+            >
+            <figcaption>After tuning, the estimated pose aligned more reliably with the robot's actual position.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2>Results and lessons</h2>
+        <p>
+          The robot explored the maze and returned to its start in 65 seconds during
+          the final end-to-end demonstration. Exploration was fast and rarely collided
+          with obstacles. Lidar artifacts near corners could sometimes appear as
+          phantom obstacles and leave a small area unexplored; tight turns on the
+          return route also remained more challenging for path tracking.
+        </p>
+        <p>
+          Testing in Gazebo and on the physical TurtleBot3 Burger let us develop and
+          validate the same software architecture across simulation and hardware. The
+          result combines SLAM, frontier exploration, risk-aware A*, action-based path
+          following, and AMCL localization in a modular ROS 2 system.
+        </p>
       </section>
       <section>
         <h2>Tools</h2>
-        <p>ROS2, Python, lidar</p>
-      </section>
-      <section>
-        <h2>Gallery</h2>
-        <div class="gal">
-          <div class="ph "><span>Photo or CAD render</span></div>
-          <div class="ph "><span>Photo or CAD render</span></div>
-          <div class="ph "><span>Photo or CAD render</span></div>
-        </div>
+        <p>ROS 2 Jazzy, Ubuntu 24.04, Python, TurtleBot3 Burger, LDS-01 lidar, SLAM Toolbox, AMCL, Gazebo, RViz</p>
       </section>
     </main>
     <div data-site-footer></div>
